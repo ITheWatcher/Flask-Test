@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Watcher</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            --bg-color: #ffffff; /* Default light mode background color */
+            --text-color: #000000; /* Default light mode text color */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .search-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .search-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .search-input {
+            font-size: 18px;
+        }
+        .search-button {
+            font-size: 18px;
+        }
+        .mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        /* Dark mode styles */
+        body.dark-mode {
+            --bg-color: #1e1e1e; /* Dark mode background color */
+            --text-color: #ffffff; /* Dark mode text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mode-toggle">
+            <button onclick="toggleMode()" class="btn btn-primary">Toggle Mode</button>
+        </div>
+        <div class="search-form">
+            <form action="/search" method="post">
+                <div class="form-group">
+                    <label for="search" class="search-title">Search for a movie:</label>
+                    <input type="text" class="form-control search-input" id="search" name="choice" placeholder="Enter movie name">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block search-button">Search</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('mode', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('mode', 'dark');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mode = localStorage.getItem('mode');
+            if (mode === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>

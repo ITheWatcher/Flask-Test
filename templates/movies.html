@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            --bg-color: #ffffff; /* Default light mode background color */
+            --text-color: #000000; /* Default light mode text color */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .movie-list {
+            margin-top: 20px;
+            background-color: #ffffff; /* Default background color for the movie list */
+        }
+        .movie-list.dark-mode {
+            background-color: #333333; /* Dark mode background color for the movie list */
+        }
+        .movie-list-item {
+            background-color: inherit; /* Inherit background color from parent */
+            border: none; /* Remove border */
+        }
+        .nested-list {
+            list-style-type: none; /* Remove bullet points */
+            padding-left: 20px; /* Add indentation */
+        }
+        .movie-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .download-link {
+            color: #007bff;
+            margin-left: 10px;
+        }
+        .mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        /* Dark mode styles */
+        body.dark-mode {
+            --bg-color: #1e1e1e; /* Dark mode background color */
+            --text-color: #ffffff; /* Dark mode text color */
+        }
+        body.dark-mode .movie-list-item {
+            background-color: #333333; /* Dark mode background color for movie list items */
+        }
+        body:not(.dark-mode) .movie-list-item {
+            background-color: #ffffff; /* Light mode background color for movie list items */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mode-toggle">
+            <button onclick="toggleMode()" class="btn btn-primary">Toggle Mode</button>
+        </div>
+        <h1 class="mb-4">Movie List</h1>
+        <ul class="list-group movie-list">
+            {% for movie in movies %}
+                <li class="list-group-item movie-list-item">
+                    <h3 class="movie-title"><a href="{{ movie.link }}" target="_blank">{{ movie.title }}</a></h3>
+                    <ul class="nested-list">
+                        {% for download in movie.downloads %}
+                            <li><a class="download-link" href="{{ download.link }}">{{ download.quality }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('mode', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('mode', 'dark');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mode = localStorage.getItem('mode');
+            if (mode === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.movie-list').classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
