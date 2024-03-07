@@ -8,8 +8,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            --bg-color: #ffffff; /* Default light mode background color */
-            --text-color: #000000; /* Default light mode text color */
+            --bg-color: #ffffff;
+            --text-color: #000000;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -19,18 +19,18 @@
         }
         .movie-list {
             margin-top: 20px;
-            background-color: #ffffff; /* Default background color for the movie list */
+            background-color: #ffffff;
         }
         .movie-list.dark-mode {
-            background-color: #333333; /* Dark mode background color for the movie list */
+            background-color: #333333;
         }
         .movie-list-item {
-            background-color: inherit; /* Inherit background color from parent */
-            border: none; /* Remove border */
+            background-color: inherit; 
+            border: none;
         }
         .nested-list {
-            list-style-type: none; /* Remove bullet points */
-            padding-left: 20px; /* Add indentation */
+            list-style-type: none;
+            padding-left: 20px;
         }
         .movie-title {
             font-size: 20px;
@@ -47,14 +47,14 @@
         }
         /* Dark mode styles */
         body.dark-mode {
-            --bg-color: #1e1e1e; /* Dark mode background color */
-            --text-color: #ffffff; /* Dark mode text color */
+            --bg-color: #1e1e1e;
+            --text-color: #ffffff;
         }
         body.dark-mode .movie-list-item {
-            background-color: #333333; /* Dark mode background color for movie list items */
+            background-color: #333333;
         }
         body:not(.dark-mode) .movie-list-item {
-            background-color: #ffffff; /* Light mode background color for movie list items */
+            background-color: #ffffff;
         }
     </style>
 </head>
